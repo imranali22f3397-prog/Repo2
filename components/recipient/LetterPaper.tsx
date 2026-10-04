@@ -18,6 +18,7 @@ export function LetterPaper({ letter, onComplete }: LetterPaperProps) {
 
   const letters = Array.from(letter);
   const letterCount = letters.length;
+  const visibleLetters = skipped ? letters : letters.slice(0, revealedCount);
   const delayPerLetter = 0.026;
 
   // Candlelight flicker values
@@ -122,11 +123,11 @@ export function LetterPaper({ letter, onComplete }: LetterPaperProps) {
           }}
         />
 
-        {letters.map((letter, i) => (
+        {visibleLetters.map((letter, i) => (
           <motion.span
             key={i}
             initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: skipped || i < revealedCount ? 1 : 0, y: skipped || i < revealedCount ? 0 : 4 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.18, ease: EASE_OUT }}
             style={{ display: 'inline', whiteSpace: letter === '\n' ? 'pre' : 'pre-wrap' }}
           >
