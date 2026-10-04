@@ -69,7 +69,7 @@ export function DateScene({ date, onNext }: DateSceneProps) {
                 key={i}
                 className={`calendar-cell ${n && !isBday && focusDay ? 'dim' : ''}`}
                 initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: focusDay && isBday ? 1.08 : 1 }}
+                animate={{ opacity: 1, scale: focusDay && isBday ? 1.04 : 1 }}
                 transition={{ delay: reduce ? 0 : i * 0.015, duration: 0.28, ease: EASE_OUT }}
               >
                 {n ?? ''}
@@ -77,9 +77,8 @@ export function DateScene({ date, onNext }: DateSceneProps) {
                   <>
                     <motion.svg
                       viewBox="0 0 36 36"
-                      width="36"
-                      height="36"
-                      style={{ position: 'absolute', inset: 0, margin: 'auto' }}
+                      className="calendar-ring"
+                      aria-hidden="true"
                     >
                       <motion.circle
                         cx="18"

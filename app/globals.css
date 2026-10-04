@@ -1473,6 +1473,17 @@ input:focus-visible {
   font-size: 12px;
   border-radius: 8px;
   position: relative;
+  min-width: 0;
+  overflow: visible;
+}
+
+.calendar-ring {
+  position: absolute;
+  inset: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  margin: auto;
+  pointer-events: none;
 }
 
 .calendar-cell.dim {

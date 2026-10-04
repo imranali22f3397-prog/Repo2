@@ -19,7 +19,7 @@ export function LetterPaper({ letter, onComplete }: LetterPaperProps) {
   const letters = Array.from(letter);
   const letterCount = letters.length;
   const visibleLetters = skipped ? letters : letters.slice(0, revealedCount);
-  const delayPerLetter = 0.026;
+  const delayPerLetter = 0.012;
 
   // Candlelight flicker values
   const flickerValues = Array.from({ length: 8 }, () => 0.5 + Math.random() * 0.15);
@@ -180,10 +180,26 @@ export function LetterPaper({ letter, onComplete }: LetterPaperProps) {
         )}
       </motion.div>
 
+      {/* Skip button while the letter is still writing */}
+      {!skipped && revealedCount < letterCount && (
+        <motion.button
+          className="primary"
+          type="button"
+          onClick={onComplete}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          style={{ marginTop: '18px' }}
+        >
+          Skip letter →
+        </motion.button>
+      )}
+
       {/* Continue button */}
       {showContinue && (
         <motion.button
           className="primary"
+          type="button"
           data-testid="continue"
           onClick={onComplete}
           initial={{ opacity: 0 }}
