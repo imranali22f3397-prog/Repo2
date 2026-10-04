@@ -1,0 +1,3 @@
+import {getPhoto} from '@/lib/storage';
+export const runtime='nodejs';
+export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){try{const {id}=await params;if(!/^[a-f0-9]{16}\.(jpg|jpeg|png|webp|gif)$/.test(id))return new Response('Not found',{status:404});const photo=await getPhoto(id);if(!photo)return new Response('Not found',{status:404});const ext=id.split('.').pop()||'jpg';const contentType=`image/${ext==='jpg'?'jpeg':ext}`;return new Response(photo,{headers:{'Content-Type':contentType,'Cache-Control':'public, max-age=31536000, immutable'}})}catch{return new Response('Not found',{status:404})}}
